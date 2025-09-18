@@ -1,0 +1,5 @@
+{
+  "name": "Yargı AI - Hukuki Belge Arama",
+  "description": "Yapay zeka destekli hukuki belge arama uygulaması. Doğal dil kullanarak ilgili makaleleri ve mahkeme kararlarını bulun.",
+  "requestFramePermissions": []
+}
