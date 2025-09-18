@@ -39,9 +39,9 @@ const setupSteps = [
         description: 'Kuruluma başlamadan önce sisteminizde (Windows) şu araçların yüklü olduğundan emin olun:',
         content: (
             <ul className="list-disc list-inside space-y-2 pl-1">
-                <li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">Git (Proje dosyalarını indirmek için)</a></li>
-                <li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">Python 3.8+ (Kurulumda "Add Python to PATH" seçeneğini işaretleyin)</a></li>
-                <li><a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">Microsoft Visual C++ Redistributable</a></li>
+                <li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Git (Proje dosyalarını indirmek için)</a></li>
+                <li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Python 3.8+ (Kurulumda "Add Python to PATH" seçeneğini işaretleyin)</a></li>
+                <li><a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Microsoft Visual C++ Redistributable</a></li>
             </ul>
         )
     },
@@ -97,17 +97,17 @@ const MCPSettingsModal: React.FC<MCPSettingsModalProps> = ({ isOpen, onClose, on
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4" onClick={onClose}>
-            <div className="bg-brand-light-dark rounded-lg shadow-2xl max-w-3xl w-full flex flex-col animate-fade-in-up" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-slate-800 rounded-lg shadow-2xl max-w-3xl w-full flex flex-col animate-fade-in-up" onClick={(e) => e.stopPropagation()}>
                 <div className="flex justify-between items-center p-6 border-b border-slate-700">
-                    <h2 className="text-2xl font-bold text-brand-text">MCP Sunucu Kurulum Sihirbazı</h2>
-                    <button onClick={onClose} className="text-brand-text-secondary hover:text-white transition-colors">
+                    <h2 className="text-2xl font-bold text-slate-200">MCP Sunucu Kurulum Sihirbazı</h2>
+                    <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
                 <div className="p-6 overflow-y-auto max-h-[70vh] space-y-6">
-                    <div className="p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/30">
-                        <h3 className="font-bold text-brand-light-blue">Bu Nedir?</h3>
-                        <p className="text-sm text-brand-text-secondary mt-1">
+                    <div className="p-4 bg-blue-400/10 rounded-lg border border-blue-400/30">
+                        <h3 className="font-bold text-blue-200">Bu Nedir?</h3>
+                        <p className="text-sm text-slate-400 mt-1">
                             Bu arayüzün çalışması için gereken arama motoru (`yargi-mcp`) sizin bilgisayarınızda çalışmalıdır. Bu sihirbaz, motoru nasıl kurup çalıştıracağınızı gösterir.
                         </p>
                     </div>
@@ -119,16 +119,16 @@ const MCPSettingsModal: React.FC<MCPSettingsModalProps> = ({ isOpen, onClose, on
                     ) : (
                         <div className="p-4 bg-slate-800/50 rounded-lg border border-slate-700">
                             <div className="flex items-center justify-between mb-4">
-                                <h4 className="font-bold text-brand-text text-lg">{`Adım ${step.id}: ${step.label}`}</h4>
-                                <span className="text-sm text-brand-text-secondary">{`${step.id} / ${setupSteps.length}`}</span>
+                                <h4 className="font-bold text-slate-200 text-lg">{`Adım ${step.id}: ${step.label}`}</h4>
+                                <span className="text-sm text-slate-400">{`${step.id} / ${setupSteps.length}`}</span>
                             </div>
-                            <p className="text-sm text-brand-text-secondary mb-4">{step.description}</p>
+                            <p className="text-sm text-slate-400 mb-4">{step.description}</p>
                             {step.content}
                             {step.commands && (
                                 <div className="space-y-2 pt-1">
                                     {step.commands.map(cmd => (
                                         <div key={cmd} className="relative">
-                                            <pre className="bg-slate-900 text-brand-light-blue text-sm p-3 pr-12 rounded-md font-mono whitespace-pre-wrap break-all">
+                                            <pre className="bg-slate-900 text-blue-200 text-sm p-3 pr-12 rounded-md font-mono whitespace-pre-wrap break-all">
                                                 <code>{cmd}</code>
                                             </pre>
                                             <CopyButton textToCopy={cmd} />
@@ -152,7 +152,7 @@ const MCPSettingsModal: React.FC<MCPSettingsModalProps> = ({ isOpen, onClose, on
                             <button 
                                 onClick={() => setCurrentStep(s => s + 1)}
                                 disabled={isCurrentlyConnected}
-                                className="px-6 py-2 bg-brand-blue text-white font-semibold rounded-md hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                                className="px-6 py-2 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                             >
                                 İleri
                             </button>

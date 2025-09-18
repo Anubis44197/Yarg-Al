@@ -41,8 +41,8 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDecisionClick, onL
     if (results.length === 0) {
         return (
             <div className="text-center mt-12">
-                <h2 className="text-2xl font-bold text-brand-text">Sonuç Bulunamadı</h2>
-                <p className="text-brand-text-secondary mt-2">
+                <h2 className="text-2xl font-bold text-slate-200">Sonuç Bulunamadı</h2>
+                <p className="text-slate-400 mt-2">
                     Arama kriterlerinize uygun bir belge bulunamadı. Lütfen farklı bir sorgu deneyin.
                 </p>
             </div>
@@ -51,13 +51,13 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDecisionClick, onL
     
     return (
         <div className="flex flex-col items-center w-full">
-            <p className="text-brand-text-secondary mb-6">{`Toplam ${totalResults} sonuç bulundu. (${results.length} gösteriliyor)`}</p>
+            <p className="text-slate-400 mb-6">{`Toplam ${totalResults} sonuç bulundu. (${results.length} gösteriliyor)`}</p>
             <div className="space-y-8 w-full">
                 {sortedCourts.map(court => (
                     <section key={court}>
-                        <h2 className="text-2xl font-bold text-brand-text mb-4 pb-2 border-b-2 border-slate-700 flex items-baseline">
+                        <h2 className="text-2xl font-bold text-slate-200 mb-4 pb-2 border-b-2 border-slate-700 flex items-baseline">
                             <span>{court} Kararları</span>
-                            <span className="ml-3 text-lg font-medium text-brand-text-secondary">
+                            <span className="ml-3 text-lg font-medium text-slate-400">
                                 ({groupedResults[court].length})
                             </span>
                         </h2>
@@ -74,7 +74,7 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDecisionClick, onL
                     <button
                         onClick={onLoadMore}
                         disabled={isLoadingMore}
-                        className="px-8 py-3 bg-brand-blue text-white font-semibold rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark focus:ring-brand-blue disabled:bg-slate-500 disabled:cursor-not-allowed transition-colors duration-200"
+                        className="px-8 py-3 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-blue-400 disabled:bg-slate-500 disabled:cursor-not-allowed transition-colors duration-200"
                     >
                         {isLoadingMore ? 'Yükleniyor...' : 'Daha Fazla Yükle'}
                     </button>

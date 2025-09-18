@@ -70,29 +70,29 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose, search
             onClick={onClose}
         >
             <div
-                className="bg-brand-light-dark rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col animate-fade-in-up"
+                className="bg-slate-800 rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col animate-fade-in-up"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex justify-between items-center p-6 border-b border-slate-700">
-                    <h2 className="text-2xl font-bold text-brand-blue">{decision.title}</h2>
-                    <button onClick={onClose} className="text-brand-text-secondary hover:text-white transition-colors">
+                    <h2 className="text-2xl font-bold text-blue-400">{decision.title}</h2>
+                    <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
                 <div className="p-6 overflow-y-auto">
-                    <div className="flex items-center text-sm text-brand-text-secondary mb-4 flex-wrap gap-x-2">
+                    <div className="flex items-center text-sm text-slate-400 mb-4 flex-wrap gap-x-2">
                         <span>Tarih: {decision.date}</span>
                         <span className="mx-2 hidden sm:inline">|</span>
                         <span>Karar No: {decision.decisionNumber}</span>
                         {decision.court && <><span className="mx-2 hidden sm:inline">|</span><span>Mahkeme: {decision.court}</span></>}
-                        {decision.documentUrl && <><span className="mx-2 hidden sm:inline">|</span><a href={decision.documentUrl} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">Kaynağı Görüntüle</a></>}
+                        {decision.documentUrl && <><span className="mx-2 hidden sm:inline">|</span><a href={decision.documentUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Kaynağı Görüntüle</a></>}
                     </div>
 
                     <div className="mb-6">
                         <button
                             onClick={handleSummarize}
                             disabled={isSummarizing || isFetchingText || !fullText}
-                            className="inline-flex items-center px-4 py-2 bg-brand-blue/20 text-brand-light-blue font-semibold rounded-md hover:bg-brand-blue/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                            className="inline-flex items-center px-4 py-2 bg-blue-400/20 text-blue-200 font-semibold rounded-md hover:bg-blue-400/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                         >
                             <svg className={`w-5 h-5 mr-2 ${isSummarizing ? 'animate-pulse-magic' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 1-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 1 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 1 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 1-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
@@ -100,22 +100,22 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose, search
                             {isSummarizing ? 'Özetleniyor...' : (isFetchingText ? 'Metin Yükleniyor...' : 'AI ile Özetle')}
                         </button>
                         {aiSummary && (
-                            <div className="mt-4 p-4 bg-gradient-to-br from-slate-800/60 to-slate-900/50 rounded-lg border border-brand-blue/30 shadow-lg animate-fade-in-summary relative">
+                            <div className="mt-4 p-4 bg-gradient-to-br from-slate-800/60 to-slate-900/50 rounded-lg border border-blue-400/30 shadow-lg animate-fade-in-summary relative">
                                 <div className="absolute top-3 right-3">
                                     <CopyButton textToCopy={aiSummary} />
                                 </div>
-                                <h4 className="font-bold text-lg text-brand-light-blue mb-2">Yapay Zeka Özeti</h4>
-                                <p className="text-brand-text leading-relaxed whitespace-pre-wrap">{aiSummary}</p>
+                                <h4 className="font-bold text-lg text-blue-200 mb-2">Yapay Zeka Özeti</h4>
+                                <p className="text-slate-200 leading-relaxed whitespace-pre-wrap">{aiSummary}</p>
                             </div>
                         )}
                     </div>
 
-                    <div className="prose prose-invert max-w-none text-brand-text leading-relaxed whitespace-pre-wrap">
-                        <h4 className="font-bold text-brand-text">Özet:</h4>
+                    <div className="prose prose-invert max-w-none text-slate-200 leading-relaxed whitespace-pre-wrap">
+                        <h4 className="font-bold text-slate-200">Özet:</h4>
                         <p>{decision.summary}</p>
                         <hr className="my-4 border-slate-700" />
                         <div className="flex justify-between items-center">
-                            <h4 className="font-bold text-brand-text">Tam Metin:</h4>
+                            <h4 className="font-bold text-slate-200">Tam Metin:</h4>
                             {fullText && !isFetchingText && <CopyButton textToCopy={fullText} />}
                         </div>
                         
@@ -134,7 +134,7 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose, search
                     </div>
                 </div>
                 <div className="p-4 border-t border-slate-700 text-right">
-                    <button onClick={onClose} className="bg-brand-blue text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-500 transition-colors">Kapat</button>
+                    <button onClick={onClose} className="bg-blue-400 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-500 transition-colors">Kapat</button>
                 </div>
             </div>
             <style>{`

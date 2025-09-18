@@ -38,7 +38,7 @@ const MCPStatusIndicator: React.FC<MCPStatusIndicatorProps> = ({ isConnected, is
     return (
         <button
             onClick={onClick}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 ${bgColor} ${textColor} hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark focus:ring-brand-blue`}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 ${bgColor} ${textColor} hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-blue-400`}
             aria-label={`MCP Sunucu Durumu: ${text}. Ayarları açmak için tıklayın.`}
         >
             <span className={`w-2.5 h-2.5 rounded-full ${dotColor}`}></span>

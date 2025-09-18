@@ -18,7 +18,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy }) => {
     return (
         <button 
             onClick={handleCopy} 
-            className="p-1.5 bg-slate-700/80 rounded-md hover:bg-slate-600 transition-colors text-brand-text-secondary hover:text-white" 
+            className="p-1.5 bg-slate-700/80 rounded-md hover:bg-slate-600 transition-colors text-slate-400 hover:text-white" 
             aria-label="Kopyala"
             title="Panoya Kopyala"
         >

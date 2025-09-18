@@ -24,11 +24,11 @@ const getCourtColor = (court?: string) => {
 const ResultItem: React.FC<ResultItemProps> = ({ decision, onClick }) => {
     return (
         <div 
-            className="bg-brand-light-dark p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition-colors duration-200 border border-slate-700 hover:border-brand-blue"
+            className="bg-slate-800 p-6 rounded-lg cursor-pointer hover:bg-slate-700 transition-colors duration-200 border border-slate-700 hover:border-blue-400"
             onClick={() => onClick(decision)}
         >
-            <h3 className="text-xl font-bold text-brand-blue mb-2">{decision.title}</h3>
-            <div className="flex items-center flex-wrap gap-x-3 gap-y-2 text-sm text-brand-text-secondary mb-3">
+            <h3 className="text-xl font-bold text-blue-400 mb-2">{decision.title}</h3>
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-2 text-sm text-slate-400 mb-3">
                 {decision.court && (
                     <span className={`py-0.5 px-2.5 rounded-full text-xs font-semibold ${getCourtColor(decision.court)}`}>
                         {decision.court}
@@ -38,7 +38,7 @@ const ResultItem: React.FC<ResultItemProps> = ({ decision, onClick }) => {
                 <span className="hidden md:inline">|</span>
                 <span>{decision.decisionNumber}</span>
             </div>
-            <p className="text-brand-text-secondary line-clamp-3">{decision.summary}</p>
+            <p className="text-slate-400 line-clamp-3">{decision.summary}</p>
         </div>
     );
 };

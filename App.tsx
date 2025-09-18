@@ -158,7 +158,7 @@ const App: React.FC = () => {
     const isSearchDisabled = isLoading || !isMCPConnected;
 
     return (
-        <div className="flex flex-col min-h-screen bg-brand-dark font-sans">
+        <div className="flex flex-col min-h-screen">
             <Header 
                 isMCPConnected={isMCPConnected}
                 isCheckingMCP={isCheckingMCP}
@@ -166,10 +166,10 @@ const App: React.FC = () => {
             />
             <main className="flex-grow flex flex-col items-center p-4 md:p-8 w-full">
                 <div className="w-full max-w-4xl text-center mb-8">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-brand-text mb-3 tracking-tight">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-200 mb-3 tracking-tight">
                         Yapay Zeka Destekli Hukuki Belge Arama
                     </h1>
-                    <p className="text-brand-text-secondary text-lg">
+                    <p className="text-slate-400 text-lg">
                         Doğal dil kullanarak ilgili makaleleri ve mahkeme kararlarını bulun.
                     </p>
                 </div>

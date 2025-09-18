@@ -22,8 +22,8 @@ const LoadingSpinner: React.FC = () => {
 
     return (
         <div className="flex justify-center items-center mt-12 flex-col">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-brand-blue"></div>
-            <p key={currentMessageIndex} className="mt-4 text-lg text-brand-text-secondary animate-fade-in-message">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-400"></div>
+            <p key={currentMessageIndex} className="mt-4 text-lg text-slate-400 animate-fade-in-message">
                 {loadingMessages[currentMessageIndex]}
             </p>
             <style>{`

@@ -13,7 +13,7 @@ const HistoryButton: React.FC<{ item: HistoryItem, onHistoryClick: (term: string
         <div className="group relative flex items-center bg-slate-700 rounded-full transition-colors duration-200 hover:bg-slate-600">
             <button
                 onClick={() => onHistoryClick(item.term)}
-                className="py-1 pl-3 pr-9 text-brand-light-blue text-sm font-medium"
+                className="py-1 pl-3 pr-9 text-blue-200 text-sm font-medium"
                 style={{ maxWidth: '250px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
                 title={item.term}
             >
@@ -25,7 +25,7 @@ const HistoryButton: React.FC<{ item: HistoryItem, onHistoryClick: (term: string
                 aria-label={item.pinned ? "Sabitlemeyi kaldır" : "Sabitle"}
                 title={item.pinned ? "Sabitlemeyi kaldır" : "Sabitle"}
             >
-                <svg className={`w-4 h-4 transition-colors ${item.pinned ? 'text-brand-blue' : 'text-slate-400 group-hover:text-brand-light-blue'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <svg className={`w-4 h-4 transition-colors ${item.pinned ? 'text-blue-400' : 'text-slate-400 group-hover:text-blue-200'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.868 2.884c.321-.772.115-1.625-.4-2.131A1.5 1.5 0 008.35.146L7.5 1.25V5a.5.5 0 00.5.5h3.25a.5.5 0 00.5-.5V1.25L11.53.146a1.5 1.5 0 00-1.082-.28z" clipRule="evenodd" />
                     <path d="M10.868 2.884A1.5 1.5 0 0112 4.135V9.25a.5.5 0 01-1 0V4.635a.5.5 0 00-.5-.5H8.5a.5.5 0 00-.5.5v4.615a.5.5 0 01-1 0V4.135a1.5 1.5 0 011.132-1.251L10.868 2.884z" />
                     <path d="M4.5 5.5a.5.5 0 00-.5.5v5.25a.5.5 0 001 0V6a.5.5 0 00-.5-.5zM15.5 5.5a.5.5 0 00-.5.5v5.25a.5.5 0 001 0V6a.5.5 0 00-.5-.5z" />
@@ -50,11 +50,11 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({ history, onHistoryClick, 
     }
 
     return (
-        <div className="w-full max-w-3xl mb-4 p-4 bg-brand-light-dark/70 rounded-lg border border-slate-700 animate-fade-in backdrop-blur-sm">
+        <div className="w-full max-w-3xl mb-4 p-4 bg-slate-800/70 rounded-lg border border-slate-700 animate-fade-in backdrop-blur-sm">
             {pinned.length > 0 && (
                 <div className="mb-4">
-                    <h3 className="text-sm font-semibold text-brand-text-secondary mb-2 flex items-center">
-                        <svg className="w-4 h-4 mr-2 text-brand-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <h3 className="text-sm font-semibold text-slate-400 mb-2 flex items-center">
+                        <svg className="w-4 h-4 mr-2 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                            <path fillRule="evenodd" d="M10.868 2.884c.321-.772.115-1.625-.4-2.131A1.5 1.5 0 008.35.146L7.5 1.25V5a.5.5 0 00.5.5h3.25a.5.5 0 00.5-.5V1.25L11.53.146a1.5 1.5 0 00-1.082-.28z" clipRule="evenodd" />
                            <path d="M10.868 2.884A1.5 1.5 0 0112 4.135V9.25a.5.5 0 01-1 0V4.635a.5.5 0 00-.5-.5H8.5a.5.5 0 00-.5.5v4.615a.5.5 0 01-1 0V4.135a1.5 1.5 0 011.132-1.251L10.868 2.884z" />
                            <path d="M4.5 5.5a.5.5 0 00-.5.5v5.25a.5.5 0 001 0V6a.5.5 0 00-.5-.5zM15.5 5.5a.5.5 0 00-.5.5v5.25a.5.5 0 001 0V6a.5.5 0 00-.5-.5z" />
@@ -71,10 +71,10 @@ const SearchHistory: React.FC<SearchHistoryProps> = ({ history, onHistoryClick, 
             {recent.length > 0 && (
                 <div>
                     <div className="flex justify-between items-center mb-2">
-                        <h3 className="text-sm font-semibold text-brand-text-secondary">Son Aramalar</h3>
+                        <h3 className="text-sm font-semibold text-slate-400">Son Aramalar</h3>
                         <button
                             onClick={onClearHistory}
-                            className="text-xs text-brand-text-secondary hover:text-brand-light-blue transition-colors focus:outline-none focus:ring-1 focus:ring-brand-blue rounded px-1"
+                            className="text-xs text-slate-400 hover:text-blue-200 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-400 rounded px-1"
                             aria-label="Arama geçmişini temizle"
                         >
                             Geçmişi Temizle
