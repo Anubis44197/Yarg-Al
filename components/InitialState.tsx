@@ -1,6 +1,12 @@
 import React from 'react';
+import SearchSuggestions from './SearchSuggestions';
 
-const InitialState: React.FC = () => {
+interface InitialStateProps {
+    onSuggestionClick: (suggestion: string) => void;
+}
+
+
+const InitialState: React.FC<InitialStateProps> = ({ onSuggestionClick }) => {
     return (
         <div className="text-center mt-12 flex flex-col items-center">
             <div className="bg-brand-light-dark p-6 rounded-full mb-6">
@@ -10,9 +16,10 @@ const InitialState: React.FC = () => {
                 </svg>
             </div>
             <h2 className="text-2xl font-bold text-brand-text">Aramaya Başlayın</h2>
-            <p className="text-brand-text-secondary mt-2">
-                İlgili hukuki belgeleri bulmak için yukarıya bir sorgu girin.
+            <p className="text-brand-text-secondary mt-2 mb-8 max-w-xl mx-auto">
+                İlgili hukuki belgeleri bulmak için yukarıya bir sorgu girin veya aşağıdaki popüler konulardan birini deneyin.
             </p>
+            <SearchSuggestions onSuggestionClick={onSuggestionClick} />
         </div>
     );
 };

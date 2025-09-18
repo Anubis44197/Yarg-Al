@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect, useState, useMemo } from 'react';
 import { summarizeWithGemini, getDocument } from '../services/geminiService';
 import type { Decision } from '../types';
+import { CopyButton } from './CopyButton';
 
 interface DocumentModalProps {
     decision: Decision;
     onClose: () => void;
+    searchQuery: string;
 }
 
-const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose }) => {
+const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose, searchQuery }) => {
     const [aiSummary, setAiSummary] = useState<string | null>(null);
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [fullText, setFullText] = useState<string | null>(decision.fullText || null);
@@ -44,6 +45,24 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose }) => {
         setAiSummary(summary);
         setIsSummarizing(false);
     };
+    
+    const highlightedText = useMemo(() => {
+        if (!fullText || !searchQuery) {
+            return fullText;
+        }
+        try {
+            // Birden çok kelimeyi ayır ve her birini vurgula
+            const queryWords = searchQuery.split(/\s+/).filter(word => word.length > 2);
+            if(queryWords.length === 0) return fullText;
+
+            const regex = new RegExp(`(${queryWords.join('|')})`, 'gi');
+            return fullText.replace(regex, '<mark class="bg-yellow-500/40 text-yellow-100 rounded px-1 py-0.5">$1</mark>');
+        } catch (e) {
+            console.error("Vurgulama sırasında regex hatası:", e);
+            return fullText;
+        }
+    }, [fullText, searchQuery]);
+
 
     return (
         <div
@@ -81,7 +100,10 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose }) => {
                             {isSummarizing ? 'Özetleniyor...' : (isFetchingText ? 'Metin Yükleniyor...' : 'AI ile Özetle')}
                         </button>
                         {aiSummary && (
-                            <div className="mt-4 p-4 bg-gradient-to-br from-slate-800/60 to-slate-900/50 rounded-lg border border-brand-blue/30 shadow-lg animate-fade-in-summary">
+                            <div className="mt-4 p-4 bg-gradient-to-br from-slate-800/60 to-slate-900/50 rounded-lg border border-brand-blue/30 shadow-lg animate-fade-in-summary relative">
+                                <div className="absolute top-3 right-3">
+                                    <CopyButton textToCopy={aiSummary} />
+                                </div>
                                 <h4 className="font-bold text-lg text-brand-light-blue mb-2">Yapay Zeka Özeti</h4>
                                 <p className="text-brand-text leading-relaxed whitespace-pre-wrap">{aiSummary}</p>
                             </div>
@@ -92,18 +114,22 @@ const DocumentModal: React.FC<DocumentModalProps> = ({ decision, onClose }) => {
                         <h4 className="font-bold text-brand-text">Özet:</h4>
                         <p>{decision.summary}</p>
                         <hr className="my-4 border-slate-700" />
-                        <h4 className="font-bold text-brand-text">Tam Metin:</h4>
+                        <div className="flex justify-between items-center">
+                            <h4 className="font-bold text-brand-text">Tam Metin:</h4>
+                            {fullText && !isFetchingText && <CopyButton textToCopy={fullText} />}
+                        </div>
+                        
                         {isFetchingText ? (
-                            <div className="space-y-3 animate-pulse">
+                            <div className="space-y-3 animate-pulse mt-2">
                                 <div className="h-4 bg-slate-700 rounded w-full"></div>
                                 <div className="h-4 bg-slate-700 rounded w-5/6"></div>
                                 <div className="h-4 bg-slate-700 rounded w-full"></div>
                                 <div className="h-4 bg-slate-700 rounded w-3/4"></div>
                             </div>
                         ) : fetchError ? (
-                            <p className="text-red-400">{fetchError}</p>
+                            <p className="text-red-400 mt-2">{fetchError}</p>
                         ) : (
-                            <p>{fullText}</p>
+                            <p className="mt-2" dangerouslySetInnerHTML={{ __html: highlightedText || '' }}></p>
                         )}
                     </div>
                 </div>

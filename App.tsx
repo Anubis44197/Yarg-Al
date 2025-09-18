@@ -27,6 +27,7 @@ const App: React.FC = () => {
     const [isMCPConnected, setIsMCPConnected] = useState(false);
     const [isCheckingMCP, setIsCheckingMCP] = useState(true);
     const [isMCPSettingsOpen, setIsMCPSettingsOpen] = useState(false);
+    const [searchQueryForModal, setSearchQueryForModal] = useState('');
 
     const [searchHistory, setSearchHistory] = useState<HistoryItem[]>(() => {
         try {
@@ -80,13 +81,14 @@ const App: React.FC = () => {
             setError('Lütfen bir arama sorgusu girin.');
             return;
         }
-
-        if (page === 1) setIsLoading(true);
-        else setIsLoadingMore(true);
-
+        
         if (page === 1) {
+            setSearchQueryForModal(trimmedQuery);
+            setIsLoading(true);
             setResults([]);
             setTotalResults(0);
+        } else {
+            setIsLoadingMore(true);
         }
 
         setHasSearched(true);
@@ -119,6 +121,11 @@ const App: React.FC = () => {
     const handleLoadMore = useCallback(() => {
         performSearch(query, currentPage + 1);
     }, [query, currentPage, performSearch]);
+
+    const handleSuggestionClick = (suggestion: string) => {
+        setQuery(suggestion);
+        performSearch(suggestion, 1);
+    };
 
     const hasMoreResults = results.length < totalResults;
 
@@ -197,7 +204,7 @@ const App: React.FC = () => {
                     {isLoading ? (
                         <LoadingSpinner />
                     ) : !hasSearched ? (
-                        <InitialState />
+                        <InitialState onSuggestionClick={handleSuggestionClick} />
                     ) : (
                         <ResultsList 
                             results={results} 
@@ -213,7 +220,11 @@ const App: React.FC = () => {
             </main>
             <Footer />
             {selectedDecision && (
-                <DocumentModal decision={selectedDecision} onClose={closeModal} />
+                <DocumentModal 
+                    decision={selectedDecision} 
+                    onClose={closeModal}
+                    searchQuery={searchQueryForModal} 
+                />
             )}
             <MCPSettingsModal 
                 isOpen={isMCPSettingsOpen}
