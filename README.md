@@ -6,16 +6,14 @@ Bu proje, `yargi-mcp` adlı güçlü bir yerel arama motorunu, Google Gemini AI'
 
 Bu uygulama iki ana bileşenden oluşur:
 
-1.  **Frontend (Bu Arayüz):** Sizin şu anda kullandığınız, React ile geliştirilmiş web uygulamasıdır. Kullanıcının arama yaptığı, sonuçları gördüğü ve yapay zeka özetlerini okuduğu "gösterge panelidir".
-2.  **Backend (MCP Motoru):** `yargi-mcp` projesi, sizin bilgisayarınızda yerel olarak çalışan "motordur". Tüm arama ve belge getirme işlemleri bu sunucu tarafından gerçekleştirilir.
-
-Arayüzün çalışabilmesi için **arka plandaki MCP motorunun sizin bilgisayarınızda çalışıyor olması zorunludur.** Aşağıdaki talimatlar, bu motoru nasıl kurup çalıştıracağınızı adım adım göstermektedir.
+1.  **Backend (MCP Motoru):** `yargi-mcp` projesi, sizin bilgisayarınızda yerel olarak çalışan "motordur". Tüm arama ve belge getirme işlemleri bu sunucu tarafından gerçekleştirilir. **Bu sunucu çalışmadan arayüz işlev görmez.**
+2.  **Frontend (Bu Arayüz):** Sizin şu anda kullandığınız, React ile geliştirilmiş web uygulamasıdır. Kullanıcının arama yaptığı, sonuçları gördüğü ve yapay zeka özetlerini okuduğu "gösterge panelidir".
 
 ---
 
 ## Kurulum ve Çalıştırma Talimatları (Windows)
 
-Bu talimatlar, Yargı AI uygulamasını kendi bilgisayarınızda çalıştırmak için gereken tüm adımları içerir. İşlemler iki ayrı terminal penceresinde yapılacaktır.
+Uygulamayı çalıştırmak için **iki ayrı terminal penceresine** ihtiyacınız olacak: biri Backend, diğeri Frontend için.
 
 ### 1. Adım: Ön Gereksinimlerin Kurulumu
 
@@ -27,7 +25,7 @@ Bu adımlar **sadece ilk kurulumda** bir kez yapılır. Eğer bu araçlar sistem
     -   [Buradan Python'ı İndirin](https://www.python.org/downloads/).
     -   **ÇOK ÖNEMLİ:** Kurulumu başlatırken alttaki **"Add Python to PATH"** kutucuğunu mutlaka işaretleyin.
 -   **Microsoft C++ Araçları:** Python paketlerinin kurulumu için gereklidir.
-    -   [Buradan "Visual Studio Build Tools"u İndirin](https://visualstudio.microsoft.com/tr/visual-cpp-build-tools/).
+    -   [Buradan "Microsoft C++ Build Tools"u İndirin](https://visualstudio.microsoft.com/tr/visual-cpp-build-tools/).
     -   İndirilen dosyayı çalıştırın ve açılan pencerede **"C++ ile masaüstü geliştirme"** seçeneğini işaretleyip sağ alttan **"Yükle"** butonuna basın.
 
 ### 2. Adım: Backend (MCP Motoru) Kurulumu ve Çalıştırılması
@@ -51,27 +49,41 @@ Bu adımlar arama motorunu kurup başlatacaktır.
     ```bash
     python run_asgi.py
     ```
-    Terminalde sunucunun `http://127.0.0.1:8000` adresinde çalıştığını belirten mesajlar göreceksiniz. **Bu terminal penceresini, arayüzü kullandığınız sürece kapatmayın.** Bu pencere sizin yerel arama motorunuzdur.
+    Terminalde sunucunun `http://127.0.0.1:8000` adresinde çalıştığını belirten mesajlar göreceksiniz. **Bu terminal penceresini, arayüzü kullandığınız sürece kapatmayın.**
 
-### 3. Adım: Frontend (Arayüz) Bağlantısı
+### 3. Adım: Frontend (Arayüz) Çalıştırılması
 
-1.  MCP Motoru yukarıdaki adımla çalışır durumdayken, bu web uygulamasının (arayüzün) açık olduğundan emin olun.
-2.  Sağ üst köşedeki **"MCP Durumu"** göstergesine tıklayarak kurulum sihirbazını açın.
-3.  Sihirbazdaki son adıma gelip **"Tüm Adımları Tamamladım, Test Et"** butonuna tıklayın.
-4.  Bağlantı başarılı olduğunda durum göstergesi yeşile dönecektir.
+Backend sunucusu çalışırken, şimdi arayüzü başlatacağız.
 
-Artık hukuki belgeler arasında arama yapmaya hazırsınız!
+1.  **Terminal 2'yi Açın:** **Yeni bir "Komut İstemi"** penceresi daha açın.
+2.  **Proje Klasörüne Gidin:** Backend için girdiğiniz klasöre tekrar girin.
+    ```bash
+    cd yargi-mcp
+    ```
+3.  **Arayüz Sunucusunu Başlatın:** Bu proje bir `npm` kurulumu gerektirmez. Python'un dahili sunucusunu kullanarak arayüzü kolayca çalıştırabiliriz. Aşağıdaki komutu çalıştırın:
+    ```bash
+    python -m http.server 3000
+    ```
+4.  **Uygulamayı Açın:** Şimdi web tarayıcınızı açın ve adres çubuğuna şunu yazın:
+    > **http://localhost:3000**
+
+Uygulama arayüzü tarayıcınızda açılacaktır. Sağ üst köşedeki durum göstergesinden MCP bağlantısını test edebilir ve aramaya başlayabilirsiniz.
 
 ---
 
-## Nasıl Kullanılır?
+## Sorun Giderme (Troubleshooting)
 
-1.  **Arama Yapın:** Ana ekrandaki arama çubuğuna bulmak istediğiniz konuyla ilgili bir sorgu yazın (örn: "kira sözleşmesinin feshi") ve "Ara" butonuna tıklayın.
-2.  **Sonuçları İnceleyin:** Arama sonuçları mahkemeye göre gruplandırılmış olarak listelenir.
-3.  **Detayları Görüntüleyin:** İlgilendiğiniz bir kararın üzerine tıklayarak tam metnini ve diğer detaylarını içeren pencereyi açın.
-4.  **AI ile Özetleyin:** Açılan penceredeki **"AI ile Özetle"** butonuna tıklayarak Google Gemini'nin uzun belgeyi sizin için özetlemesini sağlayın.
+### Hata: `nvm is not compatible with the "NPM_CONFIG_PREFIX" environment variable...`
 
-## Kullanılan Teknolojiler
+`npm install` veya `npm run dev` gibi komutları çalıştırırken bu hatayı alıyorsanız, sisteminizde `nvm` ile çakışan bir ortam değişkeni ayarlanmış demektir.
 
--   **Frontend:** React, TypeScript, Tailwind CSS, Google Gemini API
--   **Backend:** Python, FastMCP, FastAPI (`yargi-mcp` projesi)
+**Çözüm:** `NPM_CONFIG_PREFIX` ortam değişkenini sisteminizden kalıcı olarak kaldırmanız gerekir.
+
+1.  Windows'ta **Başlat** menüsüne "ortam değişkenlerini düzenle" yazın ve **"Sistem ortam değişkenlerini düzenleyin"** sonucunu açın.
+2.  Açılan "Sistem Özellikleri" penceresinde **"Ortam Değişkenleri..."** butonuna tıklayın.
+3.  Açılan yeni pencerede, hem üstteki "**Kullanıcı... için kullanıcı değişkenleri**" listesini hem de alttaki "**Sistem değişkenleri**" listesini kontrol edin.
+4.  Bu listelerden birinde `NPM_CONFIG_PREFIX` adında bir değişken bulursanız, **onu seçin ve "Sil" butonuna basın.**
+5.  Tüm pencereleri **"Tamam"** diyerek kapatın.
+6.  **ÖNEMLİ:** Değişikliğin etkili olması için **açık olan tüm terminal (cmd) pencerelerini kapatıp yeniden açın.**
+
+Bu adımlardan sonra `npm` komutlarınız düzgün çalışmalıdır. Ancak unutmayın, bu projenin arayüzünü çalıştırmak için `npm` komutlarına ihtiyacınız yoktur, yukarıdaki "Frontend Çalıştırılması" adımlarını izlemeniz yeterlidir.
